@@ -189,7 +189,5 @@ git commit -m 'Add AmazingFeature'
 ## 📄 License
 
 © 2026 Mathumitha R. All rights reserved.
-This project is private. Use or reproduction of the code is **not allowed** without the author’s permission.
-
 ```
 
