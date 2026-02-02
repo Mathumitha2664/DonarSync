@@ -190,4 +190,3 @@ git commit -m 'Add AmazingFeature'
 
 © 2026 Mathumitha R. All rights reserved.
 ```
-
