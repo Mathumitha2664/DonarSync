@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blood Donor Registration</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('blood-donation.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
+      max-width: 450px;
+      width: 90%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    select,
+    input[type="number"] {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+      cursor: pointer;
+    }
+
+    .radio-group {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: #d9534f;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #c9302c;
+    }
+
+    .back-btn {
+      margin-top: 12px;
+      background-color: #5bc0de;
+      width: 100%;
+    }
+
+    .back-btn:hover {
+      background-color: #31b0d5;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .success-message {
+      background-color: #28a745;
+      padding: 14px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px #28a745aa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Blood Donor Registration</h2>
+
+    <div id="successMsg" class="success-message hidden">
+      Registered as Donor successfully!
+    </div>
+
+    <form id="donorForm">
+      <label for="full_name">Full Name</label>
+      <input type="text" id="full_name" name="full_name" required />
+
+      <label for="phone_number">Phone Number</label>
+      <input type="tel" id="phone_number" name="phone_number" required />
+
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" required />
+
+      <label for="blood_group">Blood Group</label>
+      <select id="blood_group" name="blood_group" required>
+        <option value="" disabled selected>Select Blood Group</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+      </select>
+
+      <label>Have you donated blood before?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="donated_before" value="yes" /> Yes</label>
+        <label><input type="radio" name="donated_before" value="no" checked /> No</label>
+      </div>
+
+      <div id="monthsInput" class="hidden">
+        <label for="months_ago">If yes, how many months ago?</label>
+        <input type="number" id="months_ago" name="months_ago" min="1" max="120" placeholder="Enter months" />
+      </div>
+
+      <button type="submit">Register as Donor</button>
+    </form>
+
+    <button class="back-btn" onclick="location.href='home.html'">Back to Home</button>
+  </div>
+
+  <script>
+    const donatedRadios = document.querySelectorAll('input[name="donated_before"]');
+    const monthsInputDiv = document.getElementById('monthsInput');
+    const monthsInput = document.getElementById('months_ago');
+    const successMsg = document.getElementById('successMsg');
+    const form = document.getElementById('donorForm');
+
+    // Show/hide months input based on radio selection
+    donatedRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (radio.value === 'yes' && radio.checked) {
+          monthsInputDiv.classList.remove('hidden');
+          monthsInput.setAttribute('required', 'required');
+        } else {
+          monthsInputDiv.classList.add('hidden');
+          monthsInput.removeAttribute('required');
+          monthsInput.value = '';
+        }
+      });
+    });
+
+    // Handle AJAX submission
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch('donar.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.text())
+      .then(response => {
+        if (response.toLowerCase().includes("success")) {
+          successMsg.classList.remove('hidden');
+          form.reset();
+          monthsInputDiv.classList.add('hidden');
+          monthsInput.removeAttribute('required');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          alert("Error: " + response);
+        }
+      })
+      .catch(err => {
+        alert("Failed to submit: " + err);
+      });
+    });
+  </script>
+</body>
+</html>

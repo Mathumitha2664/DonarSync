@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Form Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .box {
+            width: 100%;
+            max-width: 400px;
+            background-color: #4a4a4a;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .user {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: white;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        p {
+            text-align: left;
+            font-weight: bold;
+            color: white;
+            margin: 0;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        input[type="submit"] {
+            padding: 12px;
+            background-color: #b64b49;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #a63b39;
+        }
+
+        .login-link {
+            margin-top: 10px;
+            font-size: 14px;
+            color: white;
+        }
+
+        .login-link a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <img src="user1.png" alt="User Icon" class="user">
+
+        <h1>Register Here</h1>
+
+        <form id="registerForm" method="POST">
+            <p>Username</p>
+            <input type="text" name="uname1" placeholder="Enter Username" required>
+
+            <p>Email</p>
+            <input type="email" name="email" placeholder="Enter email id" required>
+
+            <p>Password</p>
+            <input type="password" name="upswd1" placeholder="Enter Password" required>
+
+            <p>Retype Password</p>
+            <input type="password" name="upswd2" placeholder="Re-Enter Password" required>
+
+            <input type="submit" value="Register">
+
+            <div class="login-link">
+                <a href="index.php">Existing user? Login here</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch("register.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert("Registered Successfully!!");
+                document.getElementById("registerForm").reset();
+            })
+            .catch(error => {
+                alert("Registration failed. Try again.");
+                console.error(error);
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: url('blood-donation.jpg') no-repeat center center/cover;
+            min-height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.75);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 1.2s ease;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff4c4c;
+        }
+
+        p.tagline {
+            font-size: 20px;
+            margin-bottom: 25px;
+            font-style: italic;
+            color: #f2f2f2;
+        }
+
+        .quotes {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #ccc;
+            font-style: italic;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .donor-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .receiver-btn {
+            background: #3498db;
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .about {
+            margin-top: 40px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #eee;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 28px; }
+            p.tagline { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Save Lives, Donate Blood</h1>
+        <p class="tagline">"Your little drop of blood can make a big difference!"</p>
+
+        <div class="buttons">
+            <button class="donor-btn" onclick="location.href='donar.html'">Be a Donor</button>
+            <button class="receiver-btn" onclick="location.href='receiver.php'">Find a Donor</button>
+        </div>
+
+        <div class="quotes">
+            <p>“To the world you may be one person, but to one person you may be the world.”</p>
+            <p>“A single pint can save three lives, a single gesture can create a million smiles.”</p>
+        </div>
+
+        <div class="about">
+            <h2 style="margin-top: 30px; color: #f06292;">Why Donate Blood?</h2>
+            <p>
+                Every two seconds, someone needs blood. Whether it's for an accident victim, a cancer patient,
+                or a child undergoing surgery, your donation can save up to three lives. Blood cannot be manufactured —
+                it can only come from generous donors like you. Be a hero. Start with one drop.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
